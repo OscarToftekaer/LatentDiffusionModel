@@ -2,7 +2,7 @@
 
 For additional information please contact the authors (Oscar and Marcus) or Claes Nøhr Ladefoged to get your hands on our thesis where the logic is thorougly explained. 
 
-This repository shows the fundamentals for setting up a Latent Diffusion Model for Style-Transfer in PET imaging using a patch based approach.
+This repository shows the fundamentals for setting up a Latent Diffusion Model for Style-Transfer in PET imaging using a patch based approach. However, the scripts are not aligned such that the code can be run "off the shelf".
 
 TorchIO (https://torchio.readthedocs.io/) has been used for extracting the 3D patches of the volumes and the framework is as follows:
 ![image](https://github.com/user-attachments/assets/52a8979e-4d58-42e8-985d-9b8b85dbf5c3)
