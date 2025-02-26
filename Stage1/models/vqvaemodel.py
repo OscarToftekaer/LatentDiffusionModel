@@ -52,7 +52,7 @@ class ResidualBlock3D(nn.Module):
         return F.relu(x + self.block(x))  # Residual connection
  
 
-# Simplified Decoder without SPADE normalization
+# Decoder
 class VQVAEDecoder3D(nn.Module):
     def __init__(self, latent_dim):
         super(VQVAEDecoder3D, self).__init__()
@@ -140,7 +140,7 @@ class VQVAE3D(pl.LightningModule):
         )
         
         # Load pretrained weights
-        pretrained_path = 'models/pretrained/resnet_10_23dataset.pth'  # Update with your actual path
+        pretrained_path = 'models/pretrained/resnet_10_23dataset.pth' 
         print(f"Loading pretrained ResNet-10 weights from {pretrained_path}...")
         checkpoint = torch.load(pretrained_path, map_location=self.device)
         state_dict = checkpoint['state_dict'] if 'state_dict' in checkpoint else checkpoint
@@ -155,7 +155,7 @@ class VQVAE3D(pl.LightningModule):
         # Freeze ResNet parameters
         for param in self.resnet.parameters():
             param.requires_grad = False
-        self.resnet.eval()  # Set ResNet to evaluation mode
+        self.resnet.eval()
 
     def transfer_batch_to_device(self, batch, device, dataloader_idx):
         batch['pet'] = batch['pet'][tio.DATA].to(device)
@@ -195,9 +195,9 @@ class VQVAE3D(pl.LightningModule):
         optimizer_G, optimizer_D = self.optimizers()
         pet_patches = batch['pet'].float()
 
-        # ---------------------
+        # 
         # Train Discriminator
-        # ---------------------
+        # 
         # Generate reconstructions (detach to avoid gradients flowing to generator)
         recon_images, _, _ = self.forward(pet_patches)
         recon_images_detached = recon_images.detach()
@@ -220,9 +220,9 @@ class VQVAE3D(pl.LightningModule):
         self.manual_backward(D_loss)
         optimizer_D.step()
 
-        # -----------------
+        # 
         # Train Generator
-        # -----------------
+        # 
         # Forward pass through the VQ-VAE
         recon_images, vq_loss, encoding_indices = self.forward(pet_patches)
 
