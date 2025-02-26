@@ -15,8 +15,9 @@ The whole pipeline for the Latent Diffusion model is:
 
 
 The logic will be split into two stages:
-Stage 1: Vector Quantized Variational Autoencoder.
-Stage 2: Diffusion Model.
+
+- **Stage 1**: Vector Quantized Variational Autoencoder.
+- **Stage 2**: Diffusion Model.
 
 Stage 1 model architecture:
 ![image](https://github.com/user-attachments/assets/f201768f-ea4a-4ce3-84ea-7575c4b91080)
